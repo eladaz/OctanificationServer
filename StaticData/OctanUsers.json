@@ -1,9 +1,16 @@
 ﻿ [
-    {
-      "Name": "name",
-      "Entities": ["defect", "naama"],
-      "Followed": ["elad", "naama"],
-      "Following": ["elad", "yoed", "hanan"],
-      "Url": "localhost:8080"
-    }
+  {
+    "Name": "talia",
+    "Entities": [ "defect" ],
+    "Followed": [ "hanan" ],
+    "Following": [ ],
+    "Url": "localhost:8080"
+  },
+  {
+    "Name": "arial",
+    "Entities": [ "defect" ],
+    "Followed": [ "hanan" ],
+    "Following": [ ],
+    "Url": "localhost:8080"
+  }
  ]

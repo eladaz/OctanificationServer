@@ -18,6 +18,9 @@ namespace OctanificationServer.Server
     class StaticsService
     {
         private readonly string _resourcesPath;
+        private Member[] _staticData;
+        private Member _requstBody;
+        private List<Member> _staticCollection;
 
         internal StaticsService(string resourcesPath)
         {
@@ -27,8 +30,8 @@ namespace OctanificationServer.Server
         internal void ServeStatic(HttpListenerContext context)
         {
             Console.WriteLine("starting serving... " + context.Request.HttpMethod + " " + context.Request.RawUrl + " on thread " + Thread.CurrentThread.ManagedThreadId);
-            Member[] staticData = new Member[] {};
-            Member requstBody = ReadRequstBody(context);
+            _staticData = new Member[] {};
+            _requstBody = ReadRequstBody(context);
 
             //Thread.Sleep(10000);
 
@@ -45,7 +48,7 @@ namespace OctanificationServer.Server
                     try
                     {
                         string input = file.ReadToEnd();
-                        staticData = JSONableExtensions.FromJsonArray<Member>(input);
+                        _staticData = JSONableExtensions.FromJsonArray<Member>(input);
                     }
                     catch (Exception e)
                     {
@@ -54,7 +57,7 @@ namespace OctanificationServer.Server
                     finally
                     {
                         Console.WriteLine("finished reading from the static file " + _resourcesPath);
-                        DataProcessing(requstBody, staticData);
+                        DataProcessing(_requstBody, _staticData);
                     }
                 }
             }
@@ -146,28 +149,47 @@ namespace OctanificationServer.Server
                 staticMember.Following.AddRange(input.Following);
 
                 if (staticMember.Url != input.Url) staticMember.Url = input.Url;
+
+                _staticCollection = new List<Member>((IEnumerable<Member>) staticInput);
+
             }
             else
             {
-                IList<Member> staticCollection = staticInput;
-                staticCollection.Add(input);
+                _staticCollection = new List<Member>((IEnumerable<Member>) staticInput);
+                _staticCollection.Add(input);
             }
 
-//            foreach (var member in staticInput)
-//                foreach (var user in member.Following)
-//                {
-//                    if (user == input.Name) input.Followed[input.Followed.Length] = user;
-//                }
-//                foreach (var newUser in input.Following)
-//                {
-//                    if (newUser == member.Name) member.Followed[member.Followed.Length] = newUser;
-//                }
-//            }
-//            if (!isExists) staticInput[staticInput.Length] = input;
-//
+            AddFollowedUsers(staticInput);
+            AddUserFollowing();
 
-            
             Console.WriteLine("Finshing to processing the data...");
+        }
+
+        //Are following me
+        private void AddFollowedUsers(Member[] input)
+        {
+            Member staticMember = _staticCollection.FirstOrDefault(s => s.Name == _requstBody.Name);
+
+            foreach (var member in input) { 
+                foreach (var user in member.Following)
+                {
+                    if (user == staticMember.Name) staticMember.Followed.Add(member.Name);
+                }
+            }
+        }
+
+        //
+        private void AddUserFollowing()
+        {
+            Member staticMember = _staticCollection.FirstOrDefault(s => s.Name == _requstBody.Name);
+
+            foreach (var user in staticMember.Following) {
+                foreach (var member in _staticCollection)
+                {
+                    if (user == member.Name) member.Followed.Add(staticMember.Name);
+                }
+            }
+
         }
 
     }
