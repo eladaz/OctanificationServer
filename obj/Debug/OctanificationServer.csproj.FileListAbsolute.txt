@@ -9,3 +9,9 @@ C:\github\OctanificationServer\OctanificationServer\obj\Debug\OctanificationServ
 C:\github\OctanificationServer\OctanificationServer\bin\Debug\OctanificationServer.exe
 C:\github\OctanificationServer\OctanificationServer\bin\Debug\OctanificationServer.pdb
 C:\github\OctanificationServer\OctanificationServer\obj\Debug\OctanificationServer.csprojResolveAssemblyReference.cache
+C:\github\OctanificationServer-new\bin\Debug\OctanificationServer.exe.config
+C:\github\OctanificationServer-new\obj\Debug\OctanificationServer.exe
+C:\github\OctanificationServer-new\obj\Debug\OctanificationServer.pdb
+C:\github\OctanificationServer-new\bin\Debug\OctanificationServer.exe
+C:\github\OctanificationServer-new\bin\Debug\OctanificationServer.pdb
+C:\github\OctanificationServer-new\obj\Debug\OctanificationServer.csprojResolveAssemblyReference.cache
