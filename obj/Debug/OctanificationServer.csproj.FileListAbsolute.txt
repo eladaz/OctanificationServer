@@ -1,0 +1,11 @@
+c:\users\azulayel\documents\visual studio 2015\Projects\OctanificationServer\OctanificationServer\bin\Debug\OctanificationServer.exe.config
+c:\users\azulayel\documents\visual studio 2015\Projects\OctanificationServer\OctanificationServer\bin\Debug\OctanificationServer.exe
+c:\users\azulayel\documents\visual studio 2015\Projects\OctanificationServer\OctanificationServer\bin\Debug\OctanificationServer.pdb
+c:\users\azulayel\documents\visual studio 2015\Projects\OctanificationServer\OctanificationServer\obj\Debug\OctanificationServer.exe
+c:\users\azulayel\documents\visual studio 2015\Projects\OctanificationServer\OctanificationServer\obj\Debug\OctanificationServer.pdb
+C:\github\OctanificationServer\OctanificationServer\bin\Debug\OctanificationServer.exe.config
+C:\github\OctanificationServer\OctanificationServer\obj\Debug\OctanificationServer.exe
+C:\github\OctanificationServer\OctanificationServer\obj\Debug\OctanificationServer.pdb
+C:\github\OctanificationServer\OctanificationServer\bin\Debug\OctanificationServer.exe
+C:\github\OctanificationServer\OctanificationServer\bin\Debug\OctanificationServer.pdb
+C:\github\OctanificationServer\OctanificationServer\obj\Debug\OctanificationServer.csprojResolveAssemblyReference.cache
