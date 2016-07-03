@@ -79,6 +79,7 @@ namespace OctanificationServer.Server
             using (var reader = new StreamReader(context.Request.InputStream))
             {
                 body = reader.ReadToEnd();
+                Console.WriteLine(body);
 
                 byte[] b = Encoding.UTF8.GetBytes("ACK");
                 context.Response.StatusCode = 200;
@@ -111,11 +112,14 @@ namespace OctanificationServer.Server
             return input;
         }
 
+
+
         private void DataProcessing(Member input, Member[] staticInput)
         {
             Console.WriteLine("Starting data processing...");
-            Member staticMember = null;
 
+            Member staticMember = null;
+            
             staticMember = staticInput.FirstOrDefault(s => s.Name == input.Name);
  
             if (staticMember != null)

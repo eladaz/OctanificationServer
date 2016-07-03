@@ -4,13 +4,20 @@
     "Entities": [ "defect" ],
     "Followed": [ "hanan" ],
     "Following": [ ],
-    "Url": "localhost:8080"
+    "Url": "localhost:00000"
   },
   {
-    "Name": "arial",
+    "Name": "Meirav Mor",
     "Entities": [ "defect" ],
     "Followed": [ "hanan" ],
     "Following": [ ],
-    "Url": "localhost:8080"
+    "Url": "localhost:7777"
+  },
+    {
+    "Name": "hanan",
+    "Entities": [ "defect" ],
+    "Followed": [ "elad" ],  
+    "Following": [ "talia", "arial" ],
+    "Url": "localhost:5555"
   }
  ]

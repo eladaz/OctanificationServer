@@ -1,6 +1,7 @@
 ﻿using System;
 using System.IO;
 using System.Net;
+using System.Net.Sockets;
 using System.Threading;
 
 namespace OctanificationServer.Server
@@ -23,24 +24,33 @@ namespace OctanificationServer.Server
 			_resourcesPath = resourcesPath;
 			_shuttingDown = false;
 
-			_restsService = new RestService();
+			_restsService = new RestService(resourcesPath);
 			_staticsService = new StaticsService(resourcesPath);
 		}
 
         private string resolveAddress()
         {
-            return Dns.GetHostEntry("localhost").HostName;
+            //return Dns.GetHostEntry("localhost").HostName;
+            string localIp = null;
+            var host = Dns.GetHostEntry(Dns.GetHostName());
+            foreach (var ip in host.AddressList)
+            {
+                if (ip.AddressFamily == AddressFamily.InterNetwork)
+                {
+                    localIp = ip.ToString();
+                }
+            }
+            return localIp;
         }
 
         #region Public APIs
         public void StartServer() {
-            string hostname = resolveAddress();
 
             if (_mainThread == null || _mainThread.ThreadState != ThreadState.Running) {
 				_mainThread = new Thread(StartService);
 				_mainThread.Name = "Server Main Thread";
 				_mainThread.Start();
-				Console.WriteLine("Server started on thread {0} and listening on {1}:{2}", _mainThread.ManagedThreadId, hostname, _port);
+				Console.WriteLine("Server started on thread {0} and listening on {1}:{2}", _mainThread.ManagedThreadId, resolveAddress(), _port);
 			} else {
 				Console.WriteLine("Server may be started only once");
 			}
@@ -55,10 +65,12 @@ namespace OctanificationServer.Server
 
 		#region Internals
 		private void StartService() {
-            string hostname = resolveAddress();
+            string localIp = resolveAddress();
+            string serverUrl = string.Format("http://localhost:{0}/", _port);
+            //string serverUrl = string.Format("http://{0}:{1}/", localIp, _port);
 
             _listener = new HttpListener();
-			_listener.Prefixes.Add("http://localhost:" + _port + "/");
+			_listener.Prefixes.Add(serverUrl);
 			_listener.Start();
 
 			//	main event loop
